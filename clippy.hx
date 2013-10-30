@@ -5,6 +5,11 @@ import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
 
+
+class ButtonUp extends MovieClip { public function new() { super(); } }
+class ButtonOver extends MovieClip { public function new() { super(); } }
+class ButtonDown extends MovieClip { public function new() { super(); } }
+
 class Clippy {
   // Main
   static function main() {
@@ -13,13 +18,14 @@ class Clippy {
     // label
     
     var label:TextField = new TextField();
-    var format:TextFormat = new TextFormat("Arial", 10);
+    var format:TextFormat = new TextFormat("Arial", 12);
     
-    label.text = "copy to clipboard";
+    label.text = "Link kopieren";
     label.setTextFormat(format);
-    label.textColor = 0x888888;
+    label.textColor = 0x000000;
     label.selectable = false;
-    label.x = 15;
+    label.x = 35;
+	label.y = 9;
     label.visible = false;
     
     flash.Lib.current.addChild(label);
@@ -28,14 +34,14 @@ class Clippy {
     
     var button:SimpleButton = new SimpleButton();
     button.useHandCursor = true;
-    button.upState = flash.Lib.attach("button_up");
-    button.overState = flash.Lib.attach("button_over");
-    button.downState = flash.Lib.attach("button_down");
-    button.hitTestState = flash.Lib.attach("button_down");
+    button.upState = flash.Lib.attach("ButtonUp");
+    button.overState = flash.Lib.attach("ButtonOver");
+    button.downState = flash.Lib.attach("ButtonDown");
+    button.hitTestState = flash.Lib.attach("ButtonDown");
     
     button.addEventListener(MouseEvent.MOUSE_UP, function(e:MouseEvent) {
       flash.system.System.setClipboard(text);
-      label.text = "copied!";
+      label.text = "Link kopiert!";
       label.setTextFormat(format);
     });
     
@@ -45,7 +51,7 @@ class Clippy {
     
     button.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent) {
       label.visible = false;
-      label.text = "copy to clipboard";
+      label.text = "Link kopieren";
       label.setTextFormat(format);
     });
     
